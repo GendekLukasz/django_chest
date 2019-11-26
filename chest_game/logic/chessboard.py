@@ -27,7 +27,7 @@ class Chessboard():
         for x in range(1,9):
             if even:
                 if x%2 == 0:
-                    field = Field('cornsilk')
+                    field = Field('grey')
                     row.append(field)
                 else:
                     field = Field('brown')
@@ -37,7 +37,7 @@ class Chessboard():
                     field = Field('brown')
                     row.append(field)
                 else:
-                    field = Field('cornsilk')
+                    field = Field('grey')
                     row.append(field)  
         return row
 

@@ -16,12 +16,7 @@ class Chessman(ABC):
             'x' : self.x,
             'y' : self.y,
             }
-
-    def move(self, x, y): 
-        self.x = x
-        self.y = y
-        return None
-
+            
     def get_name(self):
         return self.name
 
