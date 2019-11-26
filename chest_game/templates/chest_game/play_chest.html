@@ -1,0 +1,20 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+<h1>heeello</h1>
+
+
+<br>
+<br>
+        {% for row in chessboard %}
+        <div class="row">
+            {% for chessman in row %}
+                <div class="col- d-flex justify-content-center align-items-center" style='width: 80px; height: 80px; background-color: {{ chessman.get_colour }};'>
+                    <h3> {{ chessman.chessman.name }} </h3>
+                </div>
+        
+        
+
+            {% endfor %}
+        </div>
+        {% endfor %}
+{% endblock content %}
