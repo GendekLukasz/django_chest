@@ -10,3 +10,6 @@ class Queen(Chessman):
             'black' : [[0,3]],
             'white' : [[7,3]],
         }
+        
+    def check_move(self, from_field , to_field):
+        return True

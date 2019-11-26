@@ -7,7 +7,8 @@ from chest_game.logic.movement import Movement
 def home(request):
     chessboard = Chessboard()
     movement = Movement(chessboard)
-    movement.move([1,0],[7,0])
+    movement.move([6,0], [5,0])
+    movement.move([1,0], [3,0])
     data = {
         'range' : range(8),
         'chessboard' : chessboard.board,

@@ -10,3 +10,6 @@ class Bishop(Chessman):
             'black' : [[0,2], [0,5]],
             'white' : [[7,2], [7,5]],
         }
+
+    def check_move(self, from_field , to_field):
+        return True

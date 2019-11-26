@@ -10,3 +10,6 @@ class Rook(Chessman):
             'black' : [[0,0], [0,7]],
             'white' : [[7,0], [7,7]],
         }
+
+    def check_move(self, from_field , to_field):
+        return True

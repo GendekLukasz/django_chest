@@ -10,3 +10,6 @@ class King(Chessman):
             'black' : [[0,4], ],
             'white' : [[7,4], ],
         }
+        
+    def check_move(self, from_field , to_field):
+        return True

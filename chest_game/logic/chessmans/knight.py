@@ -10,3 +10,6 @@ class Knight(Chessman):
             'black' : [[0,1], [0,6]],
             'white' : [[7,1], [7,6]],
         }
+        
+    def check_move(self, from_field , to_field):
+        return True
