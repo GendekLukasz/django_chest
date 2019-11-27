@@ -3,12 +3,14 @@ from django.http import HttpResponse
 from chest_game.logic.chessmans.pawn import Pawn
 from chest_game.logic.chessboard import Chessboard
 from chest_game.logic.movement import Movement
+from chest_game.logic.coordinates import Coordinates
 
 def home(request):
     chessboard = Chessboard()
     movement = Movement(chessboard)
-    movement.move([6,0], [5,0])
-    movement.move([1,0], [3,0])
+    from_coor = Coordinates('a2')
+    to_coor = Coordinates('a3')
+    movement.move(from_coor, to_coor)
     data = {
         'range' : range(8),
         'chessboard' : chessboard.board,

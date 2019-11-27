@@ -2,6 +2,7 @@ class Field():
     def __init__(self, colour):
         self.__colour = colour
         self.chessman = None
+        
     def get_colour(self):
         return self.__colour
 

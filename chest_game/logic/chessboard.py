@@ -1,4 +1,5 @@
 from chest_game.logic.field import Field
+from chest_game.logic.coordinates import Coordinates
 from chest_game.logic.chessmans.pawn import Pawn
 from chest_game.logic.chessmans.bishop import Bishop
 from chest_game.logic.chessmans.king import King
@@ -56,4 +57,5 @@ class Chessboard():
         for t in chessmans_list:
             self.fill_chessborad_with_chessman(t)
 
-
+    def get_field(self, coordinates):
+        return self.board[coordinates.get_x()][coordinates.get_y()]
