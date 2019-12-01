@@ -12,4 +12,8 @@ class Rook(Chessman):
         }
 
     def check_move(self, from_field , to_field):
-        return True
+        absolute_value = from_field.get_absolute_value(to_field)
+        if absolute_value[0] == 0 or absolute_value[1] == 0:
+            return True
+        else :
+            return False

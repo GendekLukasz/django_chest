@@ -17,4 +17,11 @@
             {% endfor %}
         </div>
         {% endfor %}
+        {{ test }}
+        <br>
+        <ul class="list-group">
+        {% for error in errors %}
+            <li class="list-group-item">{{ error }}</li>
+        {% endfor %}
+       </ul>
 {% endblock content %}

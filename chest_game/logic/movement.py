@@ -15,12 +15,17 @@ class Movement():
                 chessman_to_move.add_move()
                 self.add_move()
                 self.chessboard.get_field(to_field).set_chessman(chessman_to_move)
+                self.chessboard.error.delete_errors()
+            else:
+                self.chessboard.error.add_error('Niedozwolony ruch.')
+        else:
+            self.chessboard.error.add_error('To nie jest twój ruch.')
                 
     def add_move(self):
-        self.number_of_moves =+ 1
+        self.number_of_moves += 1
 
     def whose_move(self):
-        if self.number_of_moves%2 == 0:
-            return "White"
-        else:
+        if  self.number_of_moves != 0 and self.number_of_moves%2 != 0:
             return "Black"
+        else:
+            return "White"

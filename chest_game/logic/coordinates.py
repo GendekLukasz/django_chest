@@ -39,3 +39,6 @@ class Coordinates():
 
     def get_y(self):
         return self.coordinates[1]
+
+    def get_absolute_value(self, coordinates):
+        return [self.get_x() - coordinates.get_x(), self.get_y() - coordinates.get_y()]

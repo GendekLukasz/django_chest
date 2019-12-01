@@ -6,6 +6,7 @@ from chest_game.logic.chessmans.king import King
 from chest_game.logic.chessmans.knight import Knight
 from chest_game.logic.chessmans.queen import Queen
 from chest_game.logic.chessmans.rook import Rook
+from chest_game.logic.error import Error
 
 class Chessboard():
 
@@ -13,6 +14,7 @@ class Chessboard():
         self.board = []
         self.fill_board_with_rows()
         self.chessborad_starting_point()
+        self.error = Error()
 
     def fill_board_with_rows(self):
         for y in range(1,9):

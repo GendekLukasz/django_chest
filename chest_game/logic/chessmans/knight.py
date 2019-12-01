@@ -12,4 +12,8 @@ class Knight(Chessman):
         }
         
     def check_move(self, from_field , to_field):
-        return True
+        absolute_value = from_field.get_absolute_value(to_field)
+        if abs(absolute_value[0]) == 1 and abs(absolute_value[1]) == 2 or abs(absolute_value[0]) == 2 and abs(absolute_value[1]) == 1:
+            return True
+        else :
+            return False
