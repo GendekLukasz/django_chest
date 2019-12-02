@@ -11,5 +11,8 @@ class King(Chessman):
             'white' : [[7,4], ],
         }
         
-    def check_move(self, from_field , to_field):
+    def check_move(self, move):
+        return True
+
+    def check_move_collision(self, move):
         return True

@@ -15,6 +15,12 @@ class Chessman(ABC):
 
     @abstractmethod
     def check_move(): pass
+    
+    @abstractmethod
+    def check_move(): pass
+
+    @abstractmethod
+    def check_move_collision(): pass
 
     def get_name(self):
         return self.name

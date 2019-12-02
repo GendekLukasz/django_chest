@@ -7,25 +7,50 @@ class Movement():
         self.chessboard = chessboard
         self.number_of_moves = 0
 
-    def move(self, from_fied, to_field):
-        chessman_to_move = self.chessboard.get_field(from_fied).get_chessman()
-        if chessman_to_move != None and self.whose_move() == chessman_to_move.get_colour():
-            if chessman_to_move.check_move(from_fied, to_field):
-                self.chessboard.get_field(from_fied).delete_chessman()
-                chessman_to_move.add_move()
-                self.add_move()
-                self.chessboard.get_field(to_field).set_chessman(chessman_to_move)
-                self.chessboard.error.delete_errors()
-            else:
-                self.chessboard.error.add_error('Niedozwolony ruch.')
-        else:
-            self.chessboard.error.add_error('To nie jest twój ruch.')
-                
+    def move(self, move):
+        if self.check_attack_on_opponent(move) and self.check_collison_and_direct(move) and self.check_good_colour_move(move):
+            self.move_chessman(move)
+
+    def move_chessman(self, move):
+        self.chessboard.get_field(move.get_to_coor()).set_chessman(move.get_chessman_to_move())
+        self.chessboard.get_field(move.get_from_coor()).delete_chessman()
+        self.chessboard.get_chessman(move.get_to_coor()).add_move()
+        self.add_move()
+        self.chessboard.error.delete_errors()
+
     def add_move(self):
         self.number_of_moves += 1
+
+    def check_good_colour_move(self, move):
+        colour = self.whose_move()
+        chessman = move.get_chessman_to_move()
+        if chessman.get_colour() == colour:
+            return True
+        else:
+            self.chessboard.error.add_error('To nie jest twój ruch.')
+            return False
 
     def whose_move(self):
         if  self.number_of_moves != 0 and self.number_of_moves%2 != 0:
             return "Black"
         else:
             return "White"
+
+    def check_attack_on_opponent(self, move):
+        if not move.check_its_attack():
+            return True
+        else:        
+            if move.get_chessman_to_move().get_colour() == move.get_chessman_to_attack().get_colour():
+                self.chessboard.error.add_error('Atak na swojego pionka.')
+                return False
+            else:
+                return True
+
+
+    def check_collison_and_direct(self, move):
+        chessman = move.get_chessman_to_move()
+        if chessman.check_move(move) and chessman.check_move_collision(move):
+            return True
+        else:
+            self.chessboard.error.add_error('Niedozwolony ruch.')
+            return False

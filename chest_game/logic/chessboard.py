@@ -61,3 +61,6 @@ class Chessboard():
 
     def get_field(self, coordinates):
         return self.board[coordinates.get_x()][coordinates.get_y()]
+        
+    def get_chessman(self, coordinates):
+        return self.board[coordinates.get_x()][coordinates.get_y()].get_chessman()
