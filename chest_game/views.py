@@ -1,3 +1,4 @@
+import copy
 from django.shortcuts import render
 from django.http import HttpResponse
 from chest_game.logic.chessmans.pawn import Pawn
@@ -9,19 +10,21 @@ def home(request):
     chessboard = Chessboard()
     movement = Movement(chessboard)
     moves = []
-    moves.append(Move('a2','a3', movement.chessboard))
-    
-    moves.append(Move('a7','a5', movement.chessboard))
-    
-    moves.append(Move('b1','d3', movement.chessboard))
-    
-    # moves.append(Move('a2','a3', movement.chessboard))
-    for move in moves:
-        movement.move(move)
+    m1 = Move('a2','a3', movement.get_chessboard())
+    movement.move(m1)
+    m2 = Move('a7','a5', movement.get_chessboard())
+    movement.move(m2)
+    m3 = Move('b1','c3', movement.get_chessboard())
+    movement.move(m3)
+    m4 = Move('a8','a4', movement.get_chessboard())
+    movement.move(m4)
+    #moves.append(Move('a8','a7', movement.chessboard))
+    for movex in moves:
+        movement.move(movex)
 
     data = {
         'range' : range(8),
-        'chessboard' : chessboard.board,
+        'chessboard' :  movement.get_chessboard().board,
         'errors' : chessboard.error.get_list_of_errors(),
         'test' : movement.whose_move(),
     }

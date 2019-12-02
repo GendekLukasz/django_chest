@@ -9,6 +9,7 @@ class Move():
         self.chessman_to_move = chessboard.get_chessman(self.from_coor)
         self.chessman_to_attack = chessboard.get_chessman(self.to_coor)
         self.absolute_value = self.from_coor.get_absolute_value(self.to_coor)
+        self.board = chessboard
     
     def get_from_coor(self):
         return self.from_coor
@@ -24,9 +25,13 @@ class Move():
     
     def get_absolute_value(self):
         return self.absolute_value
+    
+    def get_chessboard(self):
+        return self.board
 
     def check_its_attack(self):
         if self.chessman_to_attack == None:
             return False
         else:
+            print(self.chessman_to_attack.get_name())
             return True
