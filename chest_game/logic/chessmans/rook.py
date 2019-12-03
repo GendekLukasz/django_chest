@@ -25,12 +25,12 @@ class Rook(Chessman):
         to_y = move.get_to_coor().get_y() if move.get_from_coor().get_y() <= move.get_to_coor().get_y() else move.get_from_coor().get_y()
         absolute = move.get_absolute_value()
         if absolute[0] == 0:
-            for y in range(from_y + 1, to_y - 1, 1):
-                if move.board.board[from_x][y] != None:
+            for y in range(from_y + 1, to_y, 1):
+                if move.board.board[from_x][y].get_chessman() != None:
                     return False
         else:
-            for x in range(from_x + 1, to_x - 1, 1):
-                if move.board.board[x][from_y] != None:
+            for x in range(from_x + 1, to_x, 1):
+                if move.board.board[x][from_y].get_chessman() != None:
                     return False
 
         return True
