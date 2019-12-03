@@ -28,7 +28,7 @@ class Rook(Chessman):
             for y in range(from_y + 1, to_y, 1):
                 if move.board.board[from_x][y].get_chessman() != None:
                     return False
-        else:
+        elif absolute[1] == 0:
             for x in range(from_x + 1, to_x, 1):
                 if move.board.board[x][from_y].get_chessman() != None:
                     return False
