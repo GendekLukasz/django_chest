@@ -12,7 +12,11 @@ class King(Chessman):
         }
         
     def check_move(self, move):
-        return True
+        absolute_value = move.get_absolute_value()
+        if abs(absolute_value[0]) == 1 and abs(absolute_value[1]) == 1 or abs(absolute_value[0]) == 1 and abs(absolute_value[1]) == 0 or abs(absolute_value[0]) == 0 and abs(absolute_value[1]) == 1:
+            return True
+        else :
+            return False
 
     def check_move_collision(self, move):
         return True

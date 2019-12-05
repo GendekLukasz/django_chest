@@ -46,11 +46,12 @@ class Movement():
             return "White"
 
     def check_attack_on_opponent(self, move):
-        if move.check_its_attack():        
+        if move.check_its_attack():    
             if move.get_chessman_to_move().get_colour() == move.get_chessman_to_attack().get_colour():
                 self.chessboard.error.add_error('Atak na swojego pionka.')
                 return False
             else:
+                move.set_attack()
                 return True
         else:
             return True

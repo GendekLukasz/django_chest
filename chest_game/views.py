@@ -10,14 +10,22 @@ def home(request):
     chessboard = Chessboard()
     movement = Movement(chessboard)
     moves = []
-    m1 = Move('c2','c4', movement.get_chessboard())
+    m1 = Move('b1','a3', movement.get_chessboard())
     movement.move(m1)
     m2 = Move('a7','a5', movement.get_chessboard())
     movement.move(m2)
-    m3 = Move('d1','a4', movement.get_chessboard())
+    m3 = Move('b2','b4', movement.get_chessboard())
     movement.move(m3)
-    m4 = Move('a8','a7', movement.get_chessboard())
+    m4 = Move('a5','b4', movement.get_chessboard())
     movement.move(m4)
+    # m5 = Move('e1','d1', movement.get_chessboard())
+    # movement.move(m5)
+    
+    # m6 = Move('e7','e5', movement.get_chessboard())
+    # movement.move(m6)
+    
+    # m6 = Move('d1','b3', movement.get_chessboard())
+    # movement.move(m6)
     #moves.append(Move('a8','a7', movement.chessboard))
     for movex in moves:
         movement.move(movex)

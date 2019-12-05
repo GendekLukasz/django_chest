@@ -19,10 +19,10 @@ class Bishop(Chessman):
             return False
 
     def check_move_collision(self, move):
-        from_x = move.get_from_coor().get_x() if move.get_from_coor().get_x() <= move.get_to_coor().get_x() else move.get_to_coor().get_x()
-        from_y = move.get_from_coor().get_y() if move.get_from_coor().get_y() <= move.get_to_coor().get_y() else move.get_to_coor().get_y()
-        to_x = move.get_to_coor().get_x() if move.get_from_coor().get_x() <= move.get_to_coor().get_x() else move.get_from_coor().get_x()
-        to_y = move.get_to_coor().get_y() if move.get_from_coor().get_y() <= move.get_to_coor().get_y() else move.get_from_coor().get_y()
+        from_x = self.get_coordinates_for_coolision_check(move)['from_x']
+        from_y = self.get_coordinates_for_coolision_check(move)['from_y']
+        to_x = self.get_coordinates_for_coolision_check(move)['to_x']
+        to_y = self.get_coordinates_for_coolision_check(move)['to_y']
         
         for y in range(from_y + 1, to_y, 1):
             for x in range(from_x + 1, to_x, 1):
