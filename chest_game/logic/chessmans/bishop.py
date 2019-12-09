@@ -7,8 +7,8 @@ class Bishop(Chessman):
     @staticmethod
     def get_starting_points_list():
         return {
-            'black' : [[0,2], [0,5]],
-            'white' : [[7,2], [7,5]],
+            'black' : ['c8', 'f8'],
+            'white' : ['c1', 'f1'],
         }
 
     def check_move(self, move):

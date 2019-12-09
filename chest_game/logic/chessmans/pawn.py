@@ -7,8 +7,8 @@ class Pawn(Chessman):
     @staticmethod
     def get_starting_points_list():
         return {
-            'black' : [[1,0], [1,1], [1,2], [1,3], [1,4], [1,5], [1,6], [1,7]],
-            'white' : [[6,0], [6,1], [6,2], [6,3], [6,4], [6,5], [6,6], [6,7]],
+            'black' : ['a7', 'b7', 'c7', 'd7', 'e7', 'f7', 'g7', 'h7'],
+            'white' : ['a2', 'b2', 'c2', 'd2', 'e2', 'f2', 'g2', 'h2'],
         }
    
     def check_move(self, move):

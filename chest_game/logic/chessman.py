@@ -2,10 +2,11 @@ from abc import ABC, abstractmethod
 from chest_game.logic.coordinates import Coordinates
 
 class Chessman(ABC):
-    def __init__(self, name, colour):
+    def __init__(self, name, colour, coordinates):
         self.name = name
         self.colour = colour
         self.number_of_moves = 0
+        self.coordinates = Coordinates(coordinates)
     
     @abstractmethod
     def weight(self): pass

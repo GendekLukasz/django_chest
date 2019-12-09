@@ -7,8 +7,8 @@ class Queen(Chessman):
     @staticmethod
     def get_starting_points_list():
         return {
-            'black' : [[0,3]],
-            'white' : [[7,3]],
+            'black' : ['d8'],
+            'white' : ['d1'],
         }
         
     def check_move(self, move):

@@ -7,8 +7,8 @@ class King(Chessman):
     @staticmethod
     def get_starting_points_list():
         return {
-            'black' : [[0,4], ],
-            'white' : [[7,4], ],
+            'black' : ['e8'],
+            'white' : ['e1'],
         }
         
     def check_move(self, move):

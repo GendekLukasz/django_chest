@@ -7,8 +7,8 @@ class Knight(Chessman):
     @staticmethod
     def get_starting_points_list():
         return {
-            'black' : [[0,1], [0,6]],
-            'white' : [[7,1], [7,6]],
+            'black' : ['b8', 'g8'],
+            'white' : ['b1', 'g1'],
         }
         
     def check_move(self, move):

@@ -7,8 +7,8 @@ class Rook(Chessman):
     @staticmethod
     def get_starting_points_list():
         return {
-            'black' : [[0,0], [0,7]],
-            'white' : [[7,0], [7,7]],
+            'black' : ['a8', 'h8'],
+            'white' : ['a1', 'h1'],
         }
 
     def check_move(self, move):

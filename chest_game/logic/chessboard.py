@@ -12,6 +12,10 @@ class Chessboard():
 
     def __init__(self):
         self.board = []
+        self.list_of_chessmans = {
+            'Black' : [],
+            'White' : []
+        }
         self.fill_board_with_rows()
         self.chessborad_starting_point()
         self.error = Error()
@@ -47,12 +51,14 @@ class Chessboard():
     def fill_chessborad_with_chessman(self, chessman):
         chesman_list = chessman.get_starting_points_list()
         for coordinates in chesman_list['black']:
-            chess = chessman(chessman.__name__, "Black")
-            self.board[coordinates[0]][coordinates[1]].set_chessman(chess)
+            chess = chessman(chessman.__name__, "Black", coordinates)
+            self.board[chess.coordinates.get_x()][chess.coordinates.get_y()].set_chessman(chess)
+            self.list_of_chessmans['Black'].append(chess)
             
         for coordinates in chesman_list['white']:
-            chess = chessman(chessman.__name__, "White")
-            self.board[coordinates[0]][coordinates[1]].set_chessman(chess)
+            chess = chessman(chessman.__name__, "White", coordinates)
+            self.board[chess.coordinates.get_x()][chess.coordinates.get_y()].set_chessman(chess)
+            self.list_of_chessmans['White'].append(chess)
 
     def chessborad_starting_point(self):
         chessmans_list = [Pawn, Bishop, Rook, Queen, King, Knight]
