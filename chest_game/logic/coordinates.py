@@ -21,6 +21,7 @@ class Coordinates():
         '8' : 0}
 
     def __init__(self, field_name):
+        self.field_name = field_name
         self.coordinates = self.field_name_to_coordinates(field_name)
 
     def field_name_to_coordinates(self, field_name):
@@ -30,6 +31,9 @@ class Coordinates():
             return [x,y]
         else:
             return None
+
+    def get_field_name(self):
+        return self.field_name
 
     def get_coordinates(self):
         return self.coordinates
@@ -42,3 +46,6 @@ class Coordinates():
 
     def get_absolute_value(self, coordinates):
         return [self.get_x() - coordinates.get_x(), self.get_y() - coordinates.get_y()]
+
+    def compare_coordinates(self, coordinates):
+        return self.get_x() == coordinates.get_x() and self.get_y() == coordinates.get_y()

@@ -1,6 +1,8 @@
 from chest_game.logic.field import Field
 from chest_game.logic.chessboard import Chessboard
 from chest_game.logic.coordinates import Coordinates
+from chest_game.logic.checkmate import CheckMate
+import copy
 
 class Movement():
     def __init__(self, chessboard):
@@ -11,13 +13,23 @@ class Movement():
         return self.chessboard
 
     def move(self, move):
-        if self.check_field_is_empty(move) and self.check_good_colour_move(move) and self.check_attack_on_opponent(move) and self.check_collison_and_direct(move):
-            self.move_chessman(move)
+        if self.check_move(move):
+            checkmate = CheckMate(copy.deepcopy(self))
+            checkmate.movement.move_chessman(move)
+            if checkmate.check_after_move():
+                self.move_chessman(move)
+            else:
+                self.chessboard.error.add_error('Ruch niedozwolony, groźba szacha.')
+
+    def check_move(self, move):
+        return self.check_field_is_empty(move) and self.check_good_colour_move(move) and self.check_attack_on_opponent(move) and self.check_collison_and_direct(move)
 
     def move_chessman(self, move):
         self.chessboard.get_field(move.get_to_coor()).set_chessman(move.get_chessman_to_move())
         self.chessboard.get_field(move.get_from_coor()).delete_chessman()
         self.chessboard.get_chessman(move.get_to_coor()).add_move()
+        self.chessboard.chessmanlist.delete_chessman_from_list(move.get_to_coor())
+        self.chessboard.chessmanlist.update_coordinates_by_move(move)
         self.add_move()
         self.chessboard.error.delete_errors()
 
@@ -40,7 +52,7 @@ class Movement():
             return False
 
     def whose_move(self):
-        if  self.number_of_moves != 0 and self.number_of_moves%2 != 0:
+        if self.number_of_moves != 0 and self.number_of_moves%2 != 0:
             return "Black"
         else:
             return "White"

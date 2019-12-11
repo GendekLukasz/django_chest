@@ -32,6 +32,9 @@ class Chessman(ABC):
     def get_number_of_moves(self):
         return self.number_of_moves
 
+    def set_coordinates(self, coordinates):
+        self.coordinates = coordinates
+
     def get_coordinates_for_coolision_check(self, move):
         return {
             'from_x' : move.get_from_coor().get_x() if move.get_from_coor().get_x() <= move.get_to_coor().get_x() else move.get_to_coor().get_x(),

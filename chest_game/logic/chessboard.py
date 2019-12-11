@@ -7,15 +7,13 @@ from chest_game.logic.chessmans.knight import Knight
 from chest_game.logic.chessmans.queen import Queen
 from chest_game.logic.chessmans.rook import Rook
 from chest_game.logic.error import Error
+from chest_game.logic.chessmanlist import ChessmanList
 
 class Chessboard():
 
     def __init__(self):
         self.board = []
-        self.list_of_chessmans = {
-            'Black' : [],
-            'White' : []
-        }
+        self.chessmanlist = ChessmanList()
         self.fill_board_with_rows()
         self.chessborad_starting_point()
         self.error = Error()
@@ -53,12 +51,12 @@ class Chessboard():
         for coordinates in chesman_list['black']:
             chess = chessman(chessman.__name__, "Black", coordinates)
             self.board[chess.coordinates.get_x()][chess.coordinates.get_y()].set_chessman(chess)
-            self.list_of_chessmans['Black'].append(chess)
+            self.chessmanlist.add_black_chess(chess)
             
         for coordinates in chesman_list['white']:
             chess = chessman(chessman.__name__, "White", coordinates)
             self.board[chess.coordinates.get_x()][chess.coordinates.get_y()].set_chessman(chess)
-            self.list_of_chessmans['White'].append(chess)
+            self.chessmanlist.add_white_chess(chess)
 
     def chessborad_starting_point(self):
         chessmans_list = [Pawn, Bishop, Rook, Queen, King, Knight]
