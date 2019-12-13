@@ -50,12 +50,12 @@ class Chessboard():
         chesman_list = chessman.get_starting_points_list()
         for coordinates in chesman_list['black']:
             chess = chessman(chessman.__name__, "Black", coordinates)
-            self.board[chess.coordinates.get_x()][chess.coordinates.get_y()].set_chessman(chess)
+            self.board[chess.coordinates.get_y()][chess.coordinates.get_x()].set_chessman(chess)
             self.chessmanlist.add_black_chess(chess)
             
         for coordinates in chesman_list['white']:
             chess = chessman(chessman.__name__, "White", coordinates)
-            self.board[chess.coordinates.get_x()][chess.coordinates.get_y()].set_chessman(chess)
+            self.board[chess.coordinates.get_y()][chess.coordinates.get_x()].set_chessman(chess)
             self.chessmanlist.add_white_chess(chess)
 
     def chessborad_starting_point(self):
@@ -64,7 +64,7 @@ class Chessboard():
             self.fill_chessborad_with_chessman(t)
 
     def get_field(self, coordinates):
-        return self.board[coordinates.get_x()][coordinates.get_y()]
+        return self.board[coordinates.get_y()][coordinates.get_x()]
         
     def get_chessman(self, coordinates):
-        return self.board[coordinates.get_x()][coordinates.get_y()].get_chessman()
+        return self.board[coordinates.get_y()][coordinates.get_x()].get_chessman()

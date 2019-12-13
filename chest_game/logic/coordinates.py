@@ -26,8 +26,8 @@ class Coordinates():
 
     def field_name_to_coordinates(self, field_name):
         if len(field_name) == 2:
-            y = Coordinates.axis_x[field_name[0]]
-            x = Coordinates.axis_y[field_name[1]]
+            y = Coordinates.axis_y[field_name[1]]
+            x = Coordinates.axis_x[field_name[0]]
             return [x,y]
         else:
             return None
@@ -45,7 +45,7 @@ class Coordinates():
         return self.coordinates[1]
 
     def get_absolute_value(self, coordinates):
-        return [self.get_x() - coordinates.get_x(), self.get_y() - coordinates.get_y()]
+        return [coordinates.get_x() - self.get_x(),coordinates.get_y() - self.get_y()]
 
     def compare_coordinates(self, coordinates):
         return self.get_x() == coordinates.get_x() and self.get_y() == coordinates.get_y()

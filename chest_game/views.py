@@ -12,14 +12,14 @@ def home(request):
     moves = []
     m1 = Move('b1','a3', movement.get_chessboard())
     movement.move(m1)
-    m2 = Move('e7','e5', movement.get_chessboard())
+    m2 = Move('a7','a5', movement.get_chessboard())
     movement.move(m2)
     m3 = Move('h2','h4', movement.get_chessboard())
     movement.move(m3)
     m4 = Move('f8','b4', movement.get_chessboard())
     movement.move(m4)
-    m5 = Move('d2','d3', movement.get_chessboard())
-    movement.move(m5)
+    # m5 = Move('b2','b3', movement.get_chessboard())
+    # movement.move(m5)
     
     # m6 = Move('e7','e5', movement.get_chessboard())
     # movement.move(m6)

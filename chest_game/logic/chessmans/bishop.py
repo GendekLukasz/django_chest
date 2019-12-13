@@ -30,14 +30,9 @@ class Bishop(Chessman):
         y_difference = 1
         if absolute_value[1] < 0:
             y_difference = -1
-        for y in range(from_y + 1, to_y, 1):
-            for x in range(from_x + 1, to_x, 1):
-
-                if x - from_x == y - from_y:
-                                    
-                    print(x)
-                    print(y)
-                    if move.board.board[x][y].get_chessman() != None:
-
+        for y in range(from_y + y_difference, to_y, y_difference):
+            for x in range(from_x + x_difference, to_x, x_difference):
+                if abs(x - from_x) == abs(y - from_y):
+                    if move.board.board[y][x].get_chessman() != None:
                         return False
         return True
