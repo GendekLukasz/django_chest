@@ -53,5 +53,7 @@ class Pawn(Chessman):
             for x in range(from_x + x_difference, to_x, x_difference):
                 if move.board.board[y][from_x].get_chessman() != None:
                     return False
-
         return True
+
+        def get_list_of_coordinates_to_check_before_mate(self, move):
+            return None

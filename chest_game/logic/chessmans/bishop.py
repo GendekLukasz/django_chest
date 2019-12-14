@@ -19,6 +19,11 @@ class Bishop(Chessman):
             return False
 
     def check_move_collision(self, move):
+        if self.get_list_of_coordinates_to_check_before_mate(move) == None:
+            return False
+        return True
+
+    def get_list_of_coordinates_to_check_before_mate(self, move):
         from_x = move.get_from_coor().get_x()
         from_y = move.get_from_coor().get_y()
         to_x = move.get_to_coor().get_x()
@@ -30,9 +35,11 @@ class Bishop(Chessman):
         y_difference = 1
         if absolute_value[1] < 0:
             y_difference = -1
+        list_of_coor = []
         for y in range(from_y + y_difference, to_y, y_difference):
             for x in range(from_x + x_difference, to_x, x_difference):
                 if abs(x - from_x) == abs(y - from_y):
                     if move.board.board[y][x].get_chessman() != None:
-                        return False
-        return True
+                        return None
+                    list_of_coor.append([x, y])             
+        return list_of_coor

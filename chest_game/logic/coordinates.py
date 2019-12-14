@@ -33,7 +33,24 @@ class Coordinates():
             return None
 
     def get_field_name(self):
-        return self.field_name
+        field_name = ''
+        for x in self.axis_x:
+            if self.coordinates[0] == self.axis_x[x]:
+                field_name += x
+        for y in self.axis_y:
+            if self.coordinates[1] == self.axis_y[y]:
+                field_name += y
+        return field_name
+
+    def change_coordinates(self, coor_to_add):
+        new_x = self.get_x() + coor_to_add[0]
+        new_y = self.get_y() + coor_to_add[1]
+        if (0 <= new_x < 8) and (0 <= new_y < 8):
+            self.coordinates[0] = new_x
+            self.coordinates[1] = new_y
+            return True
+        else:
+            return False
 
     def get_coordinates(self):
         return self.coordinates

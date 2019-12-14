@@ -20,3 +20,6 @@ class King(Chessman):
 
     def check_move_collision(self, move):
         return True
+
+    def get_list_of_coordinates_to_check_before_mate(self, move):
+        return None

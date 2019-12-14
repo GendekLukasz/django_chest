@@ -14,15 +14,29 @@ class Movement():
 
     def move(self, move):
         if self.check_move(move):
-            checkmate = CheckMate(copy.deepcopy(self))
-            checkmate.movement.move_chessman(move)
-            if checkmate.check_after_move():
+            if self.check_mate_before_move() and self.check_after_move(move):
                 self.move_chessman(move)
-            else:
-                self.chessboard.error.add_error('Ruch niedozwolony, groźba szacha.')
 
     def check_move(self, move):
         return self.check_field_is_empty(move) and self.check_good_colour_move(move) and self.check_attack_on_opponent(move) and self.check_collison_and_direct(move)
+
+    def check_move_to_mate(self, move):
+        return self.check_field_is_empty(move) and self.check_attack_on_opponent(move) and self.check_collison_and_direct(move)
+
+    def check_mate_before_move(self):
+        checkmate = CheckMate(copy.deepcopy(self))
+        checkmate.get_list_of_coordinates_where_king_can_move('White')
+        return True
+
+    def check_after_move(self, move):
+        checkmate = CheckMate(copy.deepcopy(self))
+        checkmate.movement.move_chessman(move)
+        if checkmate.check_after_move():
+            return True
+        else:
+            self.chessboard.error.add_error('Ruch niedozwolony, groźba szacha.')
+            return False
+
 
     def move_chessman(self, move):
         self.chessboard.get_field(move.get_to_coor()).set_chessman(move.get_chessman_to_move())
