@@ -14,19 +14,26 @@ class Movement():
 
     def move(self, move):
         if self.check_move(move):
-            if self.check_mate_before_move() and self.check_after_move(move):
+            if self.check_after_move(move):
                 self.move_chessman(move)
+                self.check_mate_after_move()
 
     def check_move(self, move):
         return self.check_field_is_empty(move) and self.check_good_colour_move(move) and self.check_attack_on_opponent(move) and self.check_collison_and_direct(move)
 
-    def check_move_to_mate(self, move):
-        return self.check_field_is_empty(move) and self.check_attack_on_opponent(move) and self.check_collison_and_direct(move)
+    def check_move_without_colour(self, move):
+        return self.check_field_is_empty(move) and self.check_attack_on_opponent(move) and self.check_collison_and_direct(move) 
 
-    def check_mate_before_move(self):
+    def check_move_to_mate(self, move):
+        return self.check_move_without_colour(move) and self.check_after_move(move)
+
+    def check_mate_after_move(self):
         checkmate = CheckMate(copy.deepcopy(self))
-        checkmate.get_list_of_coordinates_where_king_can_move('White')
-        return True
+        if checkmate.check_mate_after_move():
+            return True
+        else:
+            self.chessboard.error.add_error(self.who_defend() + ' wins!')
+            return False
 
     def check_after_move(self, move):
         checkmate = CheckMate(copy.deepcopy(self))
@@ -70,6 +77,12 @@ class Movement():
             return "Black"
         else:
             return "White"
+
+    def who_defend(self):
+        if self.number_of_moves != 0 and self.number_of_moves%2 != 0:
+            return "White"
+        else:
+            return "Black"
 
     def check_attack_on_opponent(self, move):
         if move.check_its_attack():    

@@ -20,9 +20,15 @@ class Coordinates():
         '7' : 1,
         '8' : 0}
 
-    def __init__(self, field_name):
+    def __init__(self, field_name = None):
+        if field_name != None:
+            self.coordinates = self.field_name_to_coordinates(field_name)
+        else:
+            self.coordinates = field_name
         self.field_name = field_name
-        self.coordinates = self.field_name_to_coordinates(field_name)
+
+    def set_coordinates(self, coor):
+        self.coordinates = coor
 
     def field_name_to_coordinates(self, field_name):
         if len(field_name) == 2:

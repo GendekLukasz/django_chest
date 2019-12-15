@@ -9,7 +9,7 @@
         <div class="row">
             {% for field in row %}
                 <div class="col- d-flex justify-content-center align-items-center" style='width: 120px; height: 120px; background-color: {{ field.get_colour }};'>
-                    <h4 style='color: {{ field.chessman.get_colour }};'> {{ field.chessman.name }}{{ forloop.parentloop.counter0 }} {{ forloop.counter0 }}</h4>
+                    <h4 style='color: {{ field.chessman.get_colour }};'> {{ field.chessman.name }}</h4>
                 </div>
         
         
