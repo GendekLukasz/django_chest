@@ -17,17 +17,8 @@ class CheckMate():
         list_of_coordinates_to_escape = self.get_list_of_coordinates_where_king_can_move(self.movement.whose_move())
         list_of_coordinates_to_shield = self.get_list_of_coordinates_to_shield_king(list_attacking_chessmans, self.movement.whose_move())
         list_of_moves_to_shield = self.get_list_of_moves_to_sield_king(self.movement.whose_move(), list_of_coordinates_to_shield)
-        
-        for x in list_attacking_chessmans:
-            print(x.get_name())
-        for x in list_of_coordinates_to_escape:
-            print(x.get_field_name())
-        for x in list_of_coordinates_to_shield:
-            print(x.get_field_name())
-            
-        for x in list_of_moves_to_shield:
-            print(x.get_from_coor().get_field_name())
-        if not list_of_coordinates_to_escape and not list_of_moves_to_shield and not self.check_to_kill_attacking_chessman(self.movement.whose_move(), list_attacking_chessmans):
+
+        if list_attacking_chessmans and not list_of_coordinates_to_escape and not list_of_moves_to_shield and not self.check_to_kill_attacking_chessman(self.movement.whose_move(), list_attacking_chessmans):
             return False
         else:
             return True
@@ -72,7 +63,6 @@ class CheckMate():
             moves += 1
             if moves > 1:
                 return False
-        print(colour)
         if colour == 'Black':
             for chessman in self.movement.get_chessboard().chessmanlist.get_all_black_chessmans():
                 for attacking_chessman in list_attacking_chessmans:

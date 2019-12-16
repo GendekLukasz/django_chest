@@ -55,5 +55,5 @@ class Pawn(Chessman):
                     return False
         return True
 
-        def get_list_of_coordinates_to_check_before_mate(self, move):
-            return None
+    def get_list_of_coordinates_to_check_before_mate(self, move):
+        return None

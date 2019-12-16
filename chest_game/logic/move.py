@@ -41,3 +41,31 @@ class Move():
 
     def check_its_attack_on_opponent(self):
         return self.attack
+
+    def get_rook_to_castling(self):
+        absolute = self.get_absolute_value()
+        if self.from_coor.get_field_name() == 'e1':
+            if absolute[0] == 2:
+                return self.board.board[7][7].get_chessman()
+            elif absolute[0] == -2:
+                return self.board.board[7][0].get_chessman()
+        if self.from_coor.get_field_name() == 'e8':
+            if absolute[0] == 2:
+                return self.board.board[0][7].get_chessman()
+            elif absolute[0] == -2:
+                return self.board.board[0][0].get_chessman()
+        return None
+        
+    def get_coor_to_check_before_castling(self):
+        absolute = self.get_absolute_value()
+        if self.from_coor.get_field_name() == 'e1':
+            if absolute[0] == 2:
+                return Coordinates('f1')
+            elif absolute[0] == -2:
+                return Coordinates('d1')
+        if self.from_coor.get_field_name() == 'e8':
+            if absolute[0] == 2:
+                return Coordinates('f8')
+            elif absolute[0] == -2:
+                return Coordinates('f8')
+        return None
