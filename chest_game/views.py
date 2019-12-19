@@ -12,23 +12,21 @@ def random_coor():
 
 def home(request):
 
-    while True:
-        chessboard = Chessboard()
-        movement = Movement(chessboard)
-        moves = []
-        print(random_coor())
-        n = 0
-        while n < 30:
-            while True:
-                m1 = Move(random_coor(), random_coor(), movement.get_chessboard())
-                movement.move(m1)
-                if not chessboard.error.get_list_of_errors() or chessboard.error.get_list_of_errors() == 'win':
-                    break
-            n += 1
-            if chessboard.error.get_list_of_errors() == 'win':
+    chessboard = Chessboard()
+    movement = Movement(chessboard)
+    moves = []
+    print(random_coor())
+    n = 0
+    while n < 10:
+        while True:
+            m1 = Move(random_coor(), random_coor(), movement.get_chessboard())
+            movement.move(m1)
+            if not chessboard.error.get_list_of_errors() or chessboard.error.get_list_of_errors() == 'win':
                 break
+        n += 1
         if chessboard.error.get_list_of_errors() == 'win':
             break
+
     # m2 = Move('a7','a5', movement.get_chessboard())
     # movement.move(m2)
     # m3 = Move('f1','g2', movement.get_chessboard())
