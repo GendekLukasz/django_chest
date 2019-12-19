@@ -7,9 +7,9 @@
 <br>
         {% for row in chessboard %}
         <div class="row">
-            {% for chessman in row %}
-                <div class="col- d-flex justify-content-center align-items-center" style='width: 80px; height: 80px; background-color: {{ chessman.get_colour }};'>
-                    <h3> {{ chessman.chessman.name }} </h3>
+            {% for field in row %}
+                <div class="col- d-flex justify-content-center align-items-center" style='width: 120px; height: 120px; background-color: {{ field.get_colour }};'>
+                    <h4 style='color: {{ field.chessman.get_colour }};'> {{ field.chessman.name }}</h4>
                 </div>
         
         
@@ -17,4 +17,11 @@
             {% endfor %}
         </div>
         {% endfor %}
+        {{ test }}
+        <br>
+        <ul class="list-group">
+        {% for error in errors %}
+            <li class="list-group-item">{{ error }}</li>
+        {% endfor %}
+       </ul>
 {% endblock content %}
