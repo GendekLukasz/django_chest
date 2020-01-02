@@ -9,6 +9,9 @@ import random
 
 def random_coor():
     return random.choice(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']) + random.choice(['1', '2', '3', '4', '5', '6', '7', '8'])
+\
+def main(request):
+    return render(request, 'base/main.html')
 
 def home(request):
 

@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['192.168.230.4']
 # Application definition
 
 INSTALLED_APPS = [
+    'account.apps.AccountConfig',
     'chest_game.apps.ChestGameConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -55,7 +56,7 @@ ROOT_URLCONF = 'chest_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
