@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['192.168.230.4']
 
 INSTALLED_APPS = [
     'account.apps.AccountConfig',
+    'crispy_forms',
     'chest_game.apps.ChestGameConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -124,3 +125,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+LOGIN_REDIRECT_URL = 'chest-play'
