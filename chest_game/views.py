@@ -1,11 +1,12 @@
 import pickle
 import copy
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from chest_game.logic.chessmans.pawn import Pawn
 from chest_game.logic.chessboard import Chessboard
 from chest_game.logic.movement import Movement
 from chest_game.logic.move import Move
+from chest_game.logic.game import Game
 import random
 
 def random_coor():
@@ -15,28 +16,25 @@ def main(request):
     return render(request, 'base/main.html')
 
 def start_game(request):
-    game_name = 'game1'
-    chessboard = Chessboard()
-    movement = Movement(chessboard)
+    game = Game(request.user.id, 0)
+    game_name = game.get_name()
     pickle_out = open(game_name, "wb")
-    pickle.dump(movement, pickle_out)
+    pickle.dump(game, pickle_out)
     pickle_out.close()
     request.session['game'] = game_name
-    return render(request, 'chest_game/play_chest.html')
+    return redirect('chest-play')
 
 def move(request):
     game_name = request.session['game']
     pickle_in = open(game_name, "rb")
-    movement = pickle.load(pickle_in)
+    game = pickle.load(pickle_in)
     while True:
-        m1 = Move(random_coor(), random_coor(), movement.get_chessboard())
-        movement.move(m1)
-        if not movement.chessboard.error.get_list_of_errors() or movement.chessboard.error.get_list_of_errors() == 'win':
+        if game.move('h5', 'f7', 1):
             break
     pickle_out = open(game_name, "wb")
-    pickle.dump(movement, pickle_out)
+    pickle.dump(game, pickle_out)
     pickle_out.close()
-    return render(request, 'chest_game/play_chest.html')
+    return redirect('chest-play')
 
 def home(request):
     # print(request.user)
@@ -83,11 +81,11 @@ def home(request):
     #     movement.move(movex)
     game_name = request.session['game']
     pickle_in = open(game_name, "rb")
-    movement = pickle.load(pickle_in)
+    game = pickle.load(pickle_in)
     data = {
         'range' : range(8),
-        'chessboard' :  movement.get_chessboard().board,
-        'errors' : movement.chessboard.error.get_list_of_errors(),
-        'test' : movement.whose_move(),
+        'chessboard' :  game.movement.get_chessboard().board,
+        'errors' : game.movement.chessboard.error.get_list_of_errors(),
+        'test' : game.movement.whose_move(),
     }
     return render(request, 'chest_game/play_chest.html', data)
