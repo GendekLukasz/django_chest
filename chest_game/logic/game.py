@@ -27,7 +27,7 @@ class Game():
 
     def move(self, from_coor, to_coor, player):
         if self.check_good_player_move(player):
-            if player == 0:
+            if player.id == 0:
                 self.random_move_for_bot()
                 return True
             else:
@@ -50,7 +50,7 @@ class Game():
                 break
 
     def check_good_player_move(self, player):
-        if self.players[self.movement.whose_move()] == player:
+        if self.players[self.movement.whose_move()].id == player.id:
             return True
         else:
             return False

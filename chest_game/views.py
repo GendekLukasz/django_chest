@@ -8,6 +8,8 @@ from chest_game.logic.movement import Movement
 from chest_game.logic.move import Move
 from chest_game.logic.game import Game
 import random
+from account.session_management import session_data
+from account.session_management import session_edit
 
 def random_coor():
     return random.choice(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']) + random.choice(['1', '2', '3', '4', '5', '6', '7', '8'])
@@ -16,21 +18,20 @@ def main(request):
     return render(request, 'base/main.html')
 
 def start_game(request):
-    game = Game(request.user.id, 0)
+    game = Game(session_data.get_user_if_logged(request.user.id), session_data.get_user_if_logged(4))
     game_name = game.get_name()
     pickle_out = open(game_name, "wb")
     pickle.dump(game, pickle_out)
     pickle_out.close()
-    request.session['game'] = game_name
+    session_edit.add_data_to_user_session(1, 'game', game_name)
+    session_edit.add_data_to_user_session(4, 'game', game_name)
     return redirect('chest-play')
 
 def move(request):
     game_name = request.session['game']
     pickle_in = open(game_name, "rb")
     game = pickle.load(pickle_in)
-    while True:
-        if game.move('h5', 'f7', 1):
-            break
+    game.move('a2', 'a3', session_data.get_user_if_logged(request.user.id))
     pickle_out = open(game_name, "wb")
     pickle.dump(game, pickle_out)
     pickle_out.close()
@@ -79,13 +80,17 @@ def home(request):
     # #moves.append(Move('a8','a7', movement.chessboard))
     # for movex in moves:
     #     movement.move(movex)
-    game_name = request.session['game']
-    pickle_in = open(game_name, "rb")
-    game = pickle.load(pickle_in)
-    data = {
-        'range' : range(8),
-        'chessboard' :  game.movement.get_chessboard().board,
-        'errors' : game.movement.chessboard.error.get_list_of_errors(),
-        'test' : game.movement.whose_move(),
-    }
+    print(session_data.get_current_users())
+    if 'game' in request.session:
+        game_name = request.session['game']
+        pickle_in = open(game_name, "rb")
+        game = pickle.load(pickle_in)
+        data = {
+            'range' : range(8),
+            'chessboard' :  game.movement.get_chessboard().board,
+            'errors' : game.movement.chessboard.error.get_list_of_errors(),
+            'test' : game.movement.whose_move(),
+            'user' : session_data.get_user_if_logged(request.user.id),
+            'game' : game_name,
+        }
     return render(request, 'chest_game/play_chest.html', data)
