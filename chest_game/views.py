@@ -10,6 +10,7 @@ from chest_game.logic.game import Game
 import random
 from account.session_management import session_data
 from account.session_management import session_edit
+from account.session_management import session_game
 
 def random_coor():
     return random.choice(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']) + random.choice(['1', '2', '3', '4', '5', '6', '7', '8'])
@@ -19,22 +20,13 @@ def main(request):
 
 def start_game(request):
     game = Game(session_data.get_user_if_logged(request.user.id), session_data.get_user_if_logged(4))
-    game_name = game.get_name()
-    pickle_out = open(game_name, "wb")
-    pickle.dump(game, pickle_out)
-    pickle_out.close()
-    session_edit.add_data_to_user_session(1, 'game', game_name)
-    session_edit.add_data_to_user_session(4, 'game', game_name)
     return redirect('chest-play')
 
 def move(request):
     game_name = request.session['game']
-    pickle_in = open(game_name, "rb")
-    game = pickle.load(pickle_in)
+    game = session_game.get_game(game_name)
     game.move('a2', 'a3', session_data.get_user_if_logged(request.user.id))
-    pickle_out = open(game_name, "wb")
-    pickle.dump(game, pickle_out)
-    pickle_out.close()
+    session_game.save_game(game)
     return redirect('chest-play')
 
 def home(request):
@@ -83,7 +75,7 @@ def home(request):
     print(session_data.get_current_users())
     if 'game' in request.session:
         game_name = request.session['game']
-        pickle_in = open(game_name, "rb")
+        pickle_in = open('games/' + game_name, "rb")
         game = pickle.load(pickle_in)
         data = {
             'range' : range(8),
@@ -92,5 +84,7 @@ def home(request):
             'test' : game.movement.whose_move(),
             'user' : session_data.get_user_if_logged(request.user.id),
             'game' : game_name,
+            'x' : 'abcdefgh',
+            'y' : '12345678',
         }
     return render(request, 'chest_game/play_chest.html', data)

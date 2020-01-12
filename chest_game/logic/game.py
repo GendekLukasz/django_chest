@@ -3,15 +3,17 @@ import string
 from chest_game.logic.move import Move
 from chest_game.logic.chessboard import Chessboard
 from chest_game.logic.movement import Movement
+from account.session_management import session_game
 
 class Game():
     def __init__(self, player1, player2):
-        self.game_name = self.randomString() 
+        self.game_name = self.randomString() + '.game'
         self.chessboard = Chessboard()
         self.movement = Movement(self.chessboard)
         self.players = self.rand_colour([player1, player2])
         self.white_player = self.players['White']
         self.black_player = self.players['Black']
+        session_game.new_game(self)
 
     def get_name(self):
         return self.game_name
