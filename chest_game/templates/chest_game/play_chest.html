@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
 {% load index %}
-<h1>heeello, {{ user }}, {{ game }}</h1>
+{% load static %}
+<script src="{% static 'js/game.js' %}"></script>
+<h1 >heeello, {{ user }}, {{ game }}</h1>
 
 
 <br>
@@ -12,7 +14,7 @@
                     <h4 style='color: white;'>{{ y|index:forloop.counter0 }}</h4>
                 </div>
                 {% for field in row %}
-                    <div class="col- d-flex justify-content-center align-items-center" style='width: 120px; height: 120px; background-color: {{ field.get_colour }}; border: 1px solid white;'>
+                    <div id="{{ x|index:forloop.counter0 }}{{ y|index:forloop.parentloop.counter0 }}"  name="field" class="col- d-flex justify-content-center align-items-center" style='width: 120px; height: 120px; background-color: {{ field.get_colour }}; border: 1px solid white;'>
                         <h4 style='color: {{ field.chessman.get_colour }};'> {{ field.chessman.name }}</h4>
                     </div>
             
