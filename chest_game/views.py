@@ -85,6 +85,6 @@ def home(request):
             'user' : session_data.get_user_if_logged(request.user.id),
             'game' : game_name,
             'x' : 'abcdefgh',
-            'y' : '12345678',
+            'y' : '87654321',
         }
     return render(request, 'chest_game/play_chest.html', data)
