@@ -33,7 +33,12 @@
 
             {% endfor %}
         </div>
+        {% include 'game/move_form.html' %}
+
         {{ test }}
+        {% for user in users %}
+            <li>{{ user.username }}, {{ user.id }}</li>
+        {% endfor %}
         <br>
         <ul class="list-group">
         {% for error in errors %}
