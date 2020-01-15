@@ -32,17 +32,17 @@ class Chessboard():
         for x in range(1,9):
             if even:
                 if x%2 == 0:
-                    field = Field('grey')
+                    field = Field('#c3c2ff')
                     row.append(field)
                 else:
-                    field = Field('brown')
+                    field = Field('#5b00db')
                     row.append(field)  
             else:
                 if x%2 == 0:
-                    field = Field('brown')
+                    field = Field('#5b00db')
                     row.append(field)
                 else:
-                    field = Field('grey')
+                    field = Field('#c3c2ff')
                     row.append(field)  
         return row
 

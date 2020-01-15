@@ -20,16 +20,19 @@ def main(request):
 
 def start_game(request):
     game = Game(session_data.get_user_if_logged(request.user.id), session_data.get_user_if_logged(3))
-    return redirect('chest-play')
+    return redirect('chest-game')
 
 def move(request):
     game_name = request.session['game']
     game = session_game.get_game(game_name)
     game.move(request.POST.get("from", ""), request.POST.get("to", ""), session_data.get_user_if_logged(request.user.id))
     session_game.save_game(game)
-    return redirect('chest-play')
+    return redirect('chest-game')
 
 def home(request):
+    return render(request, 'base/main_login.html')
+
+def game(request):
     # print(request.user)
     # chessboard = Chessboard()
     # movement = Movement(chessboard)
@@ -73,6 +76,7 @@ def home(request):
     # for movex in moves:
     #     movement.move(movex)
     if 'game' in request.session:
+        # session_edit.clear_sessions()
         game_name = request.session['game']
         pickle_in = open('games/' + game_name, "rb")
         game = pickle.load(pickle_in)
@@ -87,4 +91,4 @@ def home(request):
             'y' : '87654321',
             'users' : session_data.get_current_users(),
         }
-    return render(request, 'chest_game/play_chest.html', data)
+    return render(request, 'game/play_chest.html', data)

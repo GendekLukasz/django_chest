@@ -10,3 +10,6 @@ def add_data_to_user_session(id, data_name, data):
     print(s[data_name])
     s.save()
     s.modified
+
+def clear_sessions():
+    Session.objects.all().delete()
