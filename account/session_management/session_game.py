@@ -24,13 +24,13 @@ def new_game(game):
 
 def connect_game_with_players_by_session(game):
     game_name = game.get_name()
-    p1 = game.white_player.id
-    p2 = game.black_player.id
 
-    if p1 != 0:
+    if  game.white_player is not None:
+        p1 = game.white_player.id
         session_edit.add_data_to_user_session(p1, 'game', game_name)
     
-    if p2 != 0:
+    if game.black_player is not None:
+        p2 = game.black_player.id
         session_edit.add_data_to_user_session(p2, 'game', game_name)
         
 def get_game_address(game_name):

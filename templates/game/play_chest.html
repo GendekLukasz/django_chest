@@ -3,7 +3,8 @@
 {% load index %}
 {% load static %}
 <script src="{% static 'js/game.js' %}"></script>
-<h1>heeello, {{ user }}, {{ game }}</h1>
+<br>
+<h1>CHESSGAME</h1>
 
 
 <br>
@@ -44,9 +45,6 @@
 {% include 'game/move_form.html' %}
 
 {{ test }}
-{% for user in users %}
-<li>{{ user.username }}, {{ user.id }}</li>
-{% endfor %}
 <br>
 <ul class="list-group">
     {% for error in errors %}

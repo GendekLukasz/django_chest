@@ -11,6 +11,7 @@ import random
 from account.session_management import session_data
 from account.session_management import session_edit
 from account.session_management import session_game
+from .forms import StartGameForm
 
 def random_coor():
     return random.choice(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']) + random.choice(['1', '2', '3', '4', '5', '6', '7', '8'])
@@ -19,8 +20,14 @@ def main(request):
     return render(request, 'base/main.html')
 
 def start_game(request):
-    game = Game(session_data.get_user_if_logged(request.user.id), session_data.get_user_if_logged(3))
-    return redirect('chest-game')
+    form = StartGameForm(request.POST or None)
+    if request.method == "POST" and form.is_valid():
+        opponent = form.cleaned_data.get('opponent')
+        game = Game(session_data.get_user_if_logged(request.user.id), session_data.get_user_if_logged(opponent))
+        return redirect('chest-game')
+    
+    form = StartGameForm()
+    return render(request, 'game/start_game.html', {'form': form})
 
 def move(request):
     game_name = request.session['game']

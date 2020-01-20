@@ -20,6 +20,9 @@ class Game():
 
     def rand_colour(self, players):
         white_player = random.choice(players)
+        if players[1] is None:
+            white_player = players[0]
+
         if players[0] == white_player:
             black_player = players[1]
         else:
@@ -29,7 +32,9 @@ class Game():
 
     def move(self, from_coor, to_coor, player):
         if self.check_good_player_move(player):
-            if player.id == 0:
+            if self.black_player is None:
+                move = Move(from_coor, to_coor, self.movement.get_chessboard())
+                self.movement.move(move)
                 self.random_move_for_bot()
                 return True
             else:
@@ -52,7 +57,11 @@ class Game():
                 break
 
     def check_good_player_move(self, player):
-        if self.players[self.movement.whose_move()].id == player.id:
+        id = 0
+        if self.players[self.movement.whose_move()] is not None:
+            id = self.players[self.movement.whose_move()].id
+
+        if id == player.id:
             return True
         else:
             return False
