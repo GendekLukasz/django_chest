@@ -35,7 +35,10 @@ class Game():
             if self.black_player is None:
                 move = Move(from_coor, to_coor, self.movement.get_chessboard())
                 self.movement.move(move)
-                self.random_move_for_bot()
+                if not self.movement.chessboard.error.get_list_of_errors() and self.movement.chessboard.error.get_list_of_errors() != 'win':
+                    self.random_move_for_bot()
+                else:
+                    return False
                 return True
             else:
                 move = Move(from_coor, to_coor, self.movement.get_chessboard())

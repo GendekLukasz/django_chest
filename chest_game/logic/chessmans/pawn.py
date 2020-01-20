@@ -15,7 +15,7 @@ class Pawn(Chessman):
         absolute_value = move.get_absolute_value()
         if move.get_chessman_to_move().get_colour() == 'Black': 
             if move.check_its_attack_on_opponent():
-                if  (absolute_value[0] == -1 or absolute_value[0] == 1) and absolute_value[1] == 1:
+                if  (absolute_value[0] == -1 or absolute_value[0] == 1) and absolute_value[1] == -1:
                     return True
             else:
                 if self.get_number_of_moves() == 0 and absolute_value[0] == 0 and (absolute_value[1] == 1 or absolute_value[1] == 2):
@@ -24,7 +24,7 @@ class Pawn(Chessman):
                     return True
         else:
             if move.check_its_attack_on_opponent():
-                if  (absolute_value[1] == -1 or absolute_value[1] == 1) and absolute_value[0] == -1:
+                if  (absolute_value[1] == -1 or absolute_value[1] == 1) and absolute_value[0] == 1:
                     return True
             else:
                 if self.get_number_of_moves() == 0 and absolute_value[0] == 0 and (absolute_value[1] == -1 or absolute_value[1] == -2):
