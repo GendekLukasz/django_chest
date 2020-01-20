@@ -1,0 +1,54 @@
+{% extends "base/main_login.html" %}
+{% block content %}
+{% load index %}
+{% load static %}
+<script src="{% static 'js/game.js' %}"></script>
+<br>
+<h1>CHESSGAME</h1>
+
+
+<br>
+<br>
+<div style="margin-left: 100px;">
+    {% for row in chessboard %}
+    <div class="row">
+        <div class="col- d-flex justify-content-center align-items-center"
+            style='width: 30px; height: 70px; background-color: gray; border: 1px solid white; '>
+            <h5 style='color: white;'>{{ y|index:forloop.counter0 }}</h5>
+        </div>
+        {% for field in row %}
+        <div id="{{ x|index:forloop.counter0 }}{{ y|index:forloop.parentloop.counter0 }}" name="field"
+            class="col- d-flex justify-content-center align-items-center"
+            style='width: 70px; height: 70px; background-color: {{ field.get_colour }}; border: 1px solid white;'>
+            <img src="{% static field.chessman.svg %}" alt="{{ field.chessman.name }}">
+        </div>
+
+
+
+        {% endfor %}
+    </div>
+    {% endfor %}
+    <div class="row">
+        <div class="col- d-flex justify-content-center align-items-center"
+            style='width: 30px; height: 30px; background-color: gray; border: 1px solid white;'>
+        </div>
+        {% for pos in x %}
+        <div class="col- d-flex justify-content-center align-items-center"
+            style='width: 70px; height: 30px; background-color: gray; border: 1px solid white;'>
+            <h5 style='color: white;'>{{ pos }}</h5>
+        </div>
+
+        {% endfor %}
+    </div>
+</div>
+
+{% include 'game/move_form.html' %}
+
+{{ test }}
+<br>
+<ul class="list-group">
+    {% for error in errors %}
+    <li class="list-group-item">{{ error }}</li>
+    {% endfor %}
+</ul>
+{% endblock content %}

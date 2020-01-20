@@ -7,6 +7,7 @@ class Chessman(ABC):
         self.colour = colour
         self.number_of_moves = 0
         self.coordinates = Coordinates(coordinates)
+        self.svg = self.get_svg_address()
     
     @abstractmethod
     def weight(self): pass
@@ -31,6 +32,9 @@ class Chessman(ABC):
 
     def get_number_of_moves(self):
         return self.number_of_moves
+
+    def get_svg_address(self):
+        return "chess_pieces/" + self.name.lower() + "_" + self.colour.lower() + ".svg"
 
     def set_coordinates(self, coordinates):
         self.coordinates = coordinates

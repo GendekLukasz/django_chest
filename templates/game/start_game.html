@@ -1,0 +1,16 @@
+{% extends "base/main_login.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="d-flex justify-content-center align-items-center h-100">
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            {{ form|crispy }}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">Rozpocznij grę!</button>
+        </div>
+    </form>
+</div>
+{% endblock content %}
