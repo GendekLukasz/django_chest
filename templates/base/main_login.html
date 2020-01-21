@@ -30,18 +30,38 @@
     {% endfor %}
     {% endif %}
     <div class="row">
-        <div class="col-md-3 d-flex justify-content-center">
-            <ul class="list-group w-75 mt-3 ">
-                <li class="list-group-item">
-                    <img src="https://visualpharm.com/assets/319/Male%20User-595b40b65ba036ed117d3de6.svg">
-                </li>
-                <li class="list-group-item">
-                    <h5>Witaj, {{ user }}!</h5>
-                </li>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <h6>Wyloguj</h6>
-                </a>
-            </ul>
+        <div class="col-md-3 d-flex">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <ul class="list-group w-75 mt-3 ">
+                        <li class="list-group-item">
+                            <img src="https://visualpharm.com/assets/319/Male%20User-595b40b65ba036ed117d3de6.svg">
+                        </li>
+                        <li class="list-group-item">
+                            <h5>Witaj, {{ user }}!</h5>
+                        </li>
+                        <a href="{% url 'logout' %}" class="list-group-item list-group-item-action">
+                            <h6>Wyloguj</h6>
+                        </a>
+                    </ul>
+                </div>
+                {% if opponent %}
+                    <div class="row justify-content-center">
+                        <H1>VS</H1>
+                    </div>
+                    <div class="row justify-content-center">
+                        <ul class="list-group w-75 mt-3 ">
+                            <li class="list-group-item">
+                                <img src="https://visualpharm.com/assets/319/Male%20User-595b40b65ba036ed117d3de6.svg">
+                            </li>
+                            <li class="list-group-item">
+                                <h5> {{ opponent }}!</h5>
+                            </li>
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+
         </div>
         <div class="col-md-6">
             {% block content %}{% endblock %}

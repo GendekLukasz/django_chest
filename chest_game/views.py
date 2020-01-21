@@ -12,6 +12,8 @@ from account.session_management import session_data
 from account.session_management import session_edit
 from account.session_management import session_game
 from .forms import StartGameForm
+from django.contrib.auth.decorators import login_required
+
 
 def random_coor():
     return random.choice(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']) + random.choice(['1', '2', '3', '4', '5', '6', '7', '8'])
@@ -39,6 +41,7 @@ def move(request):
 def home(request):
     return render(request, 'base/main_login.html')
 
+@login_required(login_url='/login/')
 def game(request):
     # print(request.user)
     # chessboard = Chessboard()
@@ -87,6 +90,10 @@ def game(request):
         game_name = request.session['game']
         pickle_in = open('games/' + game_name, "rb")
         game = pickle.load(pickle_in)
+        opponent_user = game.get_opponent_player(request.user)
+        opponent_name = "AI poziom 1"
+        if opponent_user is not None:
+            opponent_name = opponent_user.username
         data = {
             'range' : range(8),
             'chessboard' :  game.movement.get_chessboard().board,
@@ -97,5 +104,6 @@ def game(request):
             'x' : 'abcdefgh',
             'y' : '87654321',
             'users' : session_data.get_current_users(),
+            'opponent' : opponent_name,
         }
     return render(request, 'game/play_chest.html', data)

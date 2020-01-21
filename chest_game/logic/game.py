@@ -13,6 +13,7 @@ class Game():
         self.players = self.rand_colour([player1, player2])
         self.white_player = self.players['White']
         self.black_player = self.players['Black']
+        self.winner = None
         session_game.new_game(self)
 
     def get_name(self):
@@ -58,6 +59,13 @@ class Game():
             self.movement.move(m1)
             if not self.movement.chessboard.error.get_list_of_errors() or self.movement.chessboard.error.get_list_of_errors() == 'win':
                 break
+
+    def get_opponent_player(self, player):
+        if self.black_player == None:
+            return None
+        if self.white_player.id == player.id:
+            return black_player
+        return self.white_player
 
     def check_good_player_move(self, player):
         id = 0
