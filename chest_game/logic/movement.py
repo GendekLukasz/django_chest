@@ -18,6 +18,7 @@ class Movement():
         if self.check_move(move):
             if self.check_after_move(move):
                 self.move_chessman(move)
+                print('xxx1')
                 self.check_mate_after_move()
 
     def check_move(self, move):
@@ -34,7 +35,7 @@ class Movement():
         if checkmate.check_mate_after_move():
             return True
         else:
-            self.chessboard.error.add_error('win')
+            self.chessboard.mate_by = self.who_defend()
             return False
 
     def check_after_move(self, move):

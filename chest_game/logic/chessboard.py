@@ -17,6 +17,7 @@ class Chessboard():
         self.fill_board_with_rows()
         self.chessborad_starting_point()
         self.error = Error()
+        self.mate_by = None
 
     def fill_board_with_rows(self):
         for y in range(1,9):

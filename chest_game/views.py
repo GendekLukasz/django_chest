@@ -105,5 +105,7 @@ def game(request):
             'y' : '87654321',
             'users' : session_data.get_current_users(),
             'opponent' : opponent_name,
+            'ended' : game.ended,
+            'winner' : game.winner,
         }
     return render(request, 'game/play_chest.html', data)

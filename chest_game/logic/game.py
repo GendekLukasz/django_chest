@@ -14,6 +14,7 @@ class Game():
         self.white_player = self.players['White']
         self.black_player = self.players['Black']
         self.winner = None
+        self.ended = False
         session_game.new_game(self)
 
     def get_name(self):
@@ -32,22 +33,31 @@ class Game():
                 'Black': black_player}
 
     def move(self, from_coor, to_coor, player):
-        if self.check_good_player_move(player):
-            if self.black_player is None:
-                move = Move(from_coor, to_coor, self.movement.get_chessboard())
-                self.movement.move(move)
-                if not self.movement.chessboard.error.get_list_of_errors() and self.movement.chessboard.error.get_list_of_errors() != 'win':
-                    self.random_move_for_bot()
-                else:
-                    return False
-                return True
-            else:
-                move = Move(from_coor, to_coor, self.movement.get_chessboard())
-                self.movement.move(move)
-                return True
-        else:
+        if self.chessboard.mate_by is not None:
+            print(self.chessboard.mate_by)
+            self.end_game(self.players[self.chessboard.mate_by])
             return False
-    
+        else:
+            if self.check_good_player_move(player):
+                if self.black_player is None:
+                    move = Move(from_coor, to_coor, self.movement.get_chessboard())
+                    self.movement.move(move)
+                    if not self.movement.chessboard.error.get_list_of_errors() and self.movement.chessboard.mate_by is None:
+                        self.random_move_for_bot()
+                    else:
+                        return False
+                    return True
+                else:
+                    move = Move(from_coor, to_coor, self.movement.get_chessboard())
+                    self.movement.move(move)
+                    return True
+            else:
+                return False
+        
+    def end_game(self, winner=None):
+        self.ended = True
+        if winner is not None:
+            self.winner = winner    
     
     def randomString(self, stringLength=10):
         letters = string.ascii_lowercase
